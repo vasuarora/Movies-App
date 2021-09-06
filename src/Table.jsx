@@ -1,3 +1,5 @@
+import "./Table.css";
+
 let Table=(props)=>{
 
     let allMovies=props.movieData;
@@ -35,8 +37,13 @@ let Table=(props)=>{
                             <td>{el.genre.name}</td>
                             <td>{el.numberInStock}</td>
                             <td>{el.dailyRentalRate}</td>
-                            <td><span class="material-icons"> favorite_border </span></td>
-                            <td><button>Delete</button></td>
+                            <td onClick={()=>{
+                                props.toggleLike(el._id)
+                            }}>
+                                {el.liked ? (<span class="material-icons"> favorite </span>) : (<span class="material-icons"> favorite_border </span>)}
+                            
+                            </td>
+                            <td><button className="delete-btn">Delete</button></td>
                             </tr>
                         )
                     })

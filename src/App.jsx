@@ -34,6 +34,26 @@ class App extends React.Component{
     this.setState({selectedFilter:filter})
   }
 
+  toggleLike=(id)=>{
+    let idx=this.state.movies.findIndex((el)=>{
+      return el._id==id;
+    });
+
+    let newMovies = this.state.movies.map((el)=>el);
+
+    if(this.state.movies[idx].liked==true){
+      newMovies[idx].liked = false;
+    }
+    
+    else{
+      newMovies[idx].liked = true;
+    }
+    
+    this.setState({
+      movies:newMovies
+    })
+  }
+
   render(){
   return(
     <>
@@ -51,6 +71,7 @@ class App extends React.Component{
           <Table 
             movieData={this.state.movies}
             selectedFilter={this.state.selectedFilter}
+            toggleLike={this.toggleLike}
             ></Table>
           <Pagination></Pagination>
         </div>
