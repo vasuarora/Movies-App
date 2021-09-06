@@ -1,6 +1,18 @@
 let Table=(props)=>{
-    return(
 
+    let allMovies=props.movieData;
+    let currFilter=props.selectedFilter;
+
+    let filteredArr=allMovies.filter((el)=>{
+        if(currFilter=="All Genre"){
+            return el;
+        }
+        else if(currFilter==el.genre.name){
+            return el;
+        }
+    })
+
+    return(
         <div className="row col-9">
         <div className="mt-4">
         <table class="table">
@@ -16,9 +28,9 @@ let Table=(props)=>{
             </thead>
             <tbody>
                 {
-                    props.movieData.map((el)=>{
+                    filteredArr.map((el)=>{
                         return(
-                            <tr>
+                            <tr key={el._id}>
                             <th scope="row">{el.title}</th>
                             <td>{el.genre.name}</td>
                             <td>{el.numberInStock}</td>
