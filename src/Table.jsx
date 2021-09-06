@@ -1,4 +1,4 @@
-let Table=()=>{
+let Table=(props)=>{
     return(
 
         <div className="row col-9">
@@ -6,30 +6,29 @@ let Table=()=>{
         <table class="table">
             <thead>
                 <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">Title</th>
+                <th scope="col">Genre</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Rate</th>
+                <th scope="col">Like</th>
+                <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                </tr>
-                <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                </tr>
-                <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-                </tr>
+                {
+                    props.movieData.map((el)=>{
+                        return(
+                            <tr>
+                            <th scope="row">{el.title}</th>
+                            <td>{el.genre.name}</td>
+                            <td>{el.numberInStock}</td>
+                            <td>{el.dailyRentalRate}</td>
+                            <td><span class="material-icons"> favorite_border </span></td>
+                            <td><button>Delete</button></td>
+                            </tr>
+                        )
+                    })
+                }
             </tbody>
         </table>
         </div>

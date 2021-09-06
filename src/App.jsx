@@ -38,7 +38,7 @@ class App extends React.Component{
 
         <div className="col-9 m-4">
           <Search></Search>
-          <Table></Table>
+          <Table movieData={this.state.movies}></Table>
           <Pagination></Pagination>
         </div>
       </div>
