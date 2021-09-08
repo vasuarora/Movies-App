@@ -11,7 +11,10 @@ class App extends React.Component{
     movies:[],
     genres:[],
     selectedFilter:"All Genre",
+    page:1,
   }
+
+
 
   componentDidMount() {
     let f = async () => {
@@ -24,6 +27,13 @@ class App extends React.Component{
         movies: moviesJson,
         genres: genreJson,
       });
+
+      let totalMovies=this.state.movies.length;
+      let pages=Math.ceil(totalMovies/4);
+      
+      this.setState({
+        page:pages
+      })
     };
 
     f();
@@ -54,7 +64,19 @@ class App extends React.Component{
     })
   }
 
+  deleteMovie=(id)=>{
+    let filteredArr=this.state.movies.filter((el)=>{
+      return el._id!=id;
+    })
+
+    this.setState({
+      movies:filteredArr,
+      page:Math.ceil(filteredArr.length/4)
+    })
+  }
+
   render(){
+
   return(
     <>
       <Navbar></Navbar>
@@ -67,13 +89,14 @@ class App extends React.Component{
         ></Filter>
 
         <div className="col-9 m-4">
-          <Search></Search>
+          <Search total={this.state.movies.length}></Search>
           <Table 
             movieData={this.state.movies}
             selectedFilter={this.state.selectedFilter}
             toggleLike={this.toggleLike}
+            deleteMovie={this.deleteMovie}
             ></Table>
-          <Pagination></Pagination>
+          <Pagination pages={this.state.page}></Pagination>
         </div>
       </div>
     </>

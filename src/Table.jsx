@@ -41,9 +41,10 @@ let Table=(props)=>{
                                 props.toggleLike(el._id)
                             }}>
                                 {el.liked ? (<span class="material-icons"> favorite </span>) : (<span class="material-icons"> favorite_border </span>)}
-                            
                             </td>
-                            <td><button className="delete-btn">Delete</button></td>
+                            <td><button onClick={()=>{
+                                props.deleteMovie(el._id)
+                            }} className="delete-btn">Delete</button></td>
                             </tr>
                         )
                     })
